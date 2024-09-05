@@ -42,31 +42,46 @@ function remark(responseTime) {
 function stopTest() {
     if (bgChangeStarted) {
         endTime = new Date();
-        var responseTime = (endTime.getTime() - startTime.getTime())/1000;
+        var responseTime = (endTime.getTime() - startTime.getTime()) / 1000; // Calculate response time in seconds
         document.bgColor = "white";
+
+        // Display the reaction time to the user
         swal({
-            text: "Your response time is: " + (responseTime*1000) + " milliseconds " + "\n" + remark(responseTime),
+            text: "Your response time is: " + (responseTime * 1000) + " milliseconds " + "\n" + remark(responseTime),
             icon: "success",
             button: "Ok",
         });
+
+        // Send the response time to the backend server
+        fetch('http://localhost:3000/record', {   // Your backend endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',  // Set the content type to JSON
+            },
+            body: JSON.stringify({ responseTime: responseTime }),  // Send the response time as JSON
+        })
+        .then(response => response.text())  // Handle the server response
+        .then(data => console.log(data))    // Log the response (optional)
+        .catch(error => console.error('Error:', error));  // Handle any errors
+
+        // Reset the test flags
         startPressed = false;
         bgChangeStarted = false;
-    }
-    else {
+    } else {
         if (!startPressed) {
-            swal("press start first to start test");
-        }
-        else {
+            swal("Press start first to start the test");
+        } else {
             clearTimeout(timerID);
             startPressed = false;
             swal({
-                text: "you pressed too early!",
+                text: "You pressed too early!",
                 icon: "error",
                 button: "Try Again",
             });
         }
     }
 }
+
 var randMULTIPLIER = 0x015a4e35;
 var randINCREMENT = 1;
 var today = new Date();
