@@ -47,7 +47,7 @@ function stopTest() {
         swal({
             text: "Your response time is: " + (responseTime*1000) + " milliseconds " + "\n" + remark(responseTime),
             icon: "success",
-            button: "Aww yiss!",
+            button: "Ok",
         });
         startPressed = false;
         bgChangeStarted = false;
@@ -62,7 +62,7 @@ function stopTest() {
             swal({
                 text: "you pressed too early!",
                 icon: "error",
-                button: "ohh okay",
+                button: "Try Again",
             });
         }
     }
