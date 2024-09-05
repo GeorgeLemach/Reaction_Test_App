@@ -11,9 +11,10 @@ app.use(bodyParser.json());
 // MySQL connection
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root', // Your MySQL username
-    password: 'your_mysql_password', // Your MySQL password
-    database: 'reaction_time_db'
+    user: 'george', // Your MySQL username
+    password: '@@@', // Your MySQL password
+    database: 'reaction_time_db',
+    port: 3306
 });
 
 db.connect((err) => {
@@ -32,6 +33,6 @@ app.post('/record', (req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
+app.listen(3000, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
