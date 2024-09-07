@@ -53,7 +53,7 @@ function stopTest() {
         });
 
         // Send the response time to the backend server
-        fetch('http://localhost:3000/record', {   // Your backend endpoint
+        fetch('http://localhost:3000/record', {   // The backend-end point
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',  // Set the content type to JSON
