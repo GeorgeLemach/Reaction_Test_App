@@ -1,0 +1,13 @@
+FROM node:14
+
+WORKDIR /app
+
+COPY ./js/backend/package*.json ./
+
+RUN npm install
+
+COPY ./js/backend/backend_server.js .
+
+EXPOSE 3000
+
+CMD ["node", "backend_server.js"]
