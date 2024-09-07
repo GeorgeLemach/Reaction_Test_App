@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // MySQL connection
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: 'host.docker.internal',
     user: 'george', // Your MySQL username
     password: '@@@', // Your MySQL password
     database: 'reaction_time_db',
@@ -30,7 +30,7 @@ db.connect((err) => {
 app.post('/record', (req, res) => {
     const responseTime = req.body.responseTime;
     console.log("received Response_Time:", responseTime);
-    
+
     const sql = 'INSERT INTO response_times (response_time) VALUES (?)';
     db.query(sql, [responseTime], (err, result) => {
         if (err) throw err;
